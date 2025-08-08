@@ -463,8 +463,6 @@ class Game:
                 
 
             pyxel.camera(player.player.x - 128, player.player.y-128)
-            if time_game.time_game_seconds_x>6:
-                score.update_score()
 
         def draw(self):
             pyxel.cls(self.background_color)

@@ -10,35 +10,16 @@ class Score:
         '''
         Initialiser les variables nécessaires au calcul des points.
         '''
-        self.enemy_type=0
         self._killed_enemies=0
-        self._killed_enemies_1 = 0
-        self._killed_enemies_2 = 0
-        self._killed_enemies_3 = 0
-        self._points_killed_enemies_1=10
-        self._points_killed_enemies_2=20
-        self._points_killed_enemies_3=50
         self._score=0
-        self.debug_pos = 256 // 2 - 10
-
-    def update_killed_enemies_count(self):
-        '''
-        Compter le nombre d'ennemis tuer.
-        '''
-        self.enemy_type=enemi.list_enemi_global[0][0]
-        if self.enemy_type==1:
-            self._killed_enemies_1 += 1
-        elif self.enemy_type==2:
-            self._killed_enemies_2+=2
-        elif self.enemy_type==5: self._killed_enemies_3+=5
+        self.debug_pos = 256 // 2 - 10      
     
-    def update_score(self):
-        '''
+    def update_score(self, enemy_score):
+        ''' 
         Calculer le score.
         '''
-        self.update_killed_enemies_count()
-        self._score = (self._killed_enemies_1*self._points_killed_enemies_1)+(self._killed_enemies_2*self._points_killed_enemies_2)+(self._killed_enemies_3*self._points_killed_enemies_3)
-        self._killed_enemies=self._killed_enemies_1+self._killed_enemies_2+ self._points_killed_enemies_3
+        self._score += enemy_score
+        self._killed_enemies += 1
 
     def get_score(self):
         return self._score
@@ -57,10 +38,8 @@ class Score:
                        f"Killed enemies: {self._killed_enemies=}", pyxel.COLOR_YELLOW)   
     def reset(self):
         self._score          = 0
-        self._killed_enemies_1 = 0
-        self._killed_enemies_2 = 0
-        self._killed_enemies_3 = 0
-        self._killed_enemies=0
+        self._killed_enemies = 0
+
 
 
 score = Score()
