@@ -2,6 +2,7 @@ import pyxel
 import debug
 import player
 import enemi
+import time_game
 
 
 class Score:
@@ -24,11 +25,11 @@ class Score:
         '''
         Compter le nombre d'ennemis tuer.
         '''
-        self.enemy_type=enemi.choose_enemi()
+        self.enemy_type=enemi.list_enemi_global[0][0]
         if self.enemy_type==1:
             self._killed_enemies_1 += 1
         elif self.enemy_type==2:
-            self._killed_enemies_2+=1
+            self._killed_enemies_2+=2
         elif self.enemy_type==5: self._killed_enemies_3+=5
     
     def update_score(self):

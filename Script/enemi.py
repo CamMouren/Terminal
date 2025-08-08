@@ -8,9 +8,9 @@ list_enemi_global = []
 list_projectile_global = []
 nb_enemi_global = 0 # attention +1 pour normal(mini boss +5) 
                     #           +2 pour mage(mini boss + 1)
+list_type_enemi=[]
 
-
-list_enemi_kill_debug = []
+list_enemi_kill_debug = ()
 
 fps_enemi = 30
 
@@ -207,7 +207,7 @@ class Enemi:
     def draw(self):
         pyxel.blt(self.x, self.y, self.tileset, self.tileset_x, self.tileset_y, self.width * self.side, self.height, colkey = 2, scale=self.scale)
 
-poid_enemi_mini = 1
+poids_enemi_mini = 1
 class Enemi_mini(Enemi):
     def __init__(self, coo_x, coo_y):
         super().__init__(coo_x, coo_y)
@@ -215,8 +215,12 @@ class Enemi_mini(Enemi):
         self.speed = 2.2
         self.base_life = 1
         self.life = self.base_life 
+        self.poids_enemi_mini = 1
+    
+    def getPoidsEnemiMini(self):
+        return self.poids_enemi_mini
 
-poid_enemi_mage = 5
+poids_enemi_mage = 5
 class Enemi_mage(Enemi):
     def __init__(self,coo_x,coo_y):
         super().__init__(coo_x,coo_y)
@@ -224,6 +228,8 @@ class Enemi_mage(Enemi):
         self.base_speed = 0.3
         self.base_life = 2
         self.life = self.base_life 
+        self.poids_enemi_mage = 5
+
 
         self.tileset_x_base = 128
         self.tileset_y_base = 16
@@ -236,6 +242,9 @@ class Enemi_mage(Enemi):
         self.dmin_player_attack = 100
 
         self.time_kill_colldown = 5
+    
+    def getPoidsEnemiMage(self):
+        return self.poids_enemi_mage
     
     def update_player_interaction(self):
         #attack du monstre
@@ -256,24 +265,32 @@ class Enemi_mage(Enemi):
     def update_side(self):
         self.side = 1 if self.dx_player < 0 else -1
 
-poid_enemi_mage_mini = 2
+poids_enemi_mage_mini = 2
 class Enemi_mage_mini(Enemi_mage):
     def __init__(self, coo_x, coo_y):
         super().__init__(coo_x, coo_y)
         self.base_life = 1
-        self.life = self.base_life 
+        self.life = self.base_life
+        self.poids_enemi_mage_mini = 2
         self.speed = 0.6
         self.time_kill_colldown = 3
         self.scale = pyxel.rndf(0.4,0.8)
 
-poid_enemi_mage_pro = 1
+    def getPoidsEnemi_mage_mini(self):
+        return self.poids_enemi_mage_mini
+
+poids_enemi_mage_pro = 1
 class Enemi_mage_pro(Enemi_mage):
     def __init__(self, coo_x, coo_y):
         super().__init__(coo_x, coo_y)
         self.base_speed = 0.2
         self.scale = pyxel.rndf(1.4,1.6)
         self.base_life = 4
-        self.life = self.base_life 
+        self.poids_enemi_mage_pro = 1
+        self.life = self.base_life
+
+    def getPoidsEnemi_mage_pro(self):
+        return self.poids_enemi_mage_pro
         
     def update_player_interaction(self):
         #attack du monstre
@@ -376,10 +393,10 @@ class Enemi_mage_projectile:
 
 list_type_enemi = (
     [Enemi] * poid_enemi +
-    [Enemi_mage] * poid_enemi_mage+
-    [Enemi_mage_pro] * poid_enemi_mage_pro+
-    [Enemi_mini] * poid_enemi_mini+
-    [Enemi_mage_mini] * poid_enemi_mage_mini
+    [Enemi_mage] * poids_enemi_mage+
+    [Enemi_mage_pro] * poids_enemi_mage_pro+
+    [Enemi_mini] * poids_enemi_mini+
+    [Enemi_mage_mini] * poids_enemi_mage_mini
 )
 
     
