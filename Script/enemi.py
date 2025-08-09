@@ -16,7 +16,8 @@ fps_enemi = 30
 
 #default enemi : squeletton
 class Enemi:
-    score=10
+    score = 10
+    poids = 20
     def __init__(self,coo_x,coo_y):
         self.x = coo_x
         self.y = coo_y
@@ -208,7 +209,8 @@ class Enemi:
         pyxel.blt(self.x, self.y, self.tileset, self.tileset_x, self.tileset_y, self.width * self.side, self.height, colkey = 2, scale=self.scale)
 
 class Enemi_mini(Enemi):
-    score=10
+    score = 10
+    poids = 1
     def __init__(self, coo_x, coo_y):
         super().__init__(coo_x, coo_y)
         self.scale = pyxel.rndf(0.4,0.8)
@@ -218,7 +220,8 @@ class Enemi_mini(Enemi):
 
 
 class Enemi_mage(Enemi):
-    score=50
+    score = 50
+    poids = 5
     def __init__(self,coo_x,coo_y):
         super().__init__(coo_x,coo_y)
 
@@ -260,7 +263,8 @@ class Enemi_mage(Enemi):
         self.side = 1 if self.dx_player < 0 else -1
 
 class Enemi_mage_mini(Enemi_mage):
-    score=20
+    poids = 2
+    score = 20
     def __init__(self, coo_x, coo_y):
         super().__init__(coo_x, coo_y)
         self.base_life = 1
@@ -271,7 +275,8 @@ class Enemi_mage_mini(Enemi_mage):
 
 
 class Enemi_mage_pro(Enemi_mage):
-    score=10
+    poids = 1
+    score = 10
     def __init__(self, coo_x, coo_y):
         super().__init__(coo_x, coo_y)
         self.base_speed = 0.2
@@ -379,11 +384,11 @@ class Enemi_mage_projectile:
 
 
 list_type_enemi = (
-    [Enemi] * Enemi.score +
-    [Enemi_mage] * Enemi_mage.score+
-    [Enemi_mage_pro] * Enemi_mage_pro.score+
-    [Enemi_mini] * Enemi_mini.score+
-    [Enemi_mage_mini] * Enemi_mage_mini.score
+    [Enemi] * Enemi.poids +
+    [Enemi_mage] * Enemi_mage.poids+
+    [Enemi_mage_pro] * Enemi_mage_pro.poids+
+    [Enemi_mini] * Enemi_mini.poids+
+    [Enemi_mage_mini] * Enemi_mage_mini.poids
 )
 
     
